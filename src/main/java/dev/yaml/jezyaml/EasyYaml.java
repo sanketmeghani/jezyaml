@@ -61,4 +61,16 @@ public class EasyYaml
 
         return value == null ? defaultValue : value.toString();
     }
+
+    public Integer getInteger(String key)
+    {
+        return getInteger(key, null);
+    }
+
+    public Integer getInteger(String key, Integer defaultValue)
+    {
+        Object value = getProperty(key);
+
+        return value == null ? defaultValue : Integer.valueOf(value.toString());
+    }
 }
