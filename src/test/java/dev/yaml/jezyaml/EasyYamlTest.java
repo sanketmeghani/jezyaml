@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class EasyYamlTest
 {
-    private String yaml = "a: 'string'\nb: 2\nc:\n  - aaa\n  - bbb\nd: false";
+    private String yaml = "a: 'string'\nb: 2\nc:\n  - aaa\n  - bbb\nd: false\nlevel1:\n  level2:\n    level3: 'Level 3 Value'";
 
     @Test
     public void shouldCreateUsingString()
@@ -94,5 +94,14 @@ public class EasyYamlTest
 
         Boolean value = easyYaml.getBoolean("unknown", Boolean.TRUE);
         Assert.assertEquals("Unexpected integer value.", Boolean.TRUE, value);
+    }
+    
+    @Test
+    public void shouldReturnNestedStringProperty()
+    {
+        EasyYaml easyYaml = new EasyYaml(yaml);
+        
+        String value = easyYaml.getString("level1.level2.level3");
+        Assert.assertEquals("", "Level 3 Value", value);
     }
 }
