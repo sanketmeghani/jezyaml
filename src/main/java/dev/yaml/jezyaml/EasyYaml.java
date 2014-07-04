@@ -1,7 +1,9 @@
 package dev.yaml.jezyaml;
 
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
@@ -122,5 +124,13 @@ public class EasyYaml
         Object value = getProperty(key);
 
         return value == null ? defaultValue : Boolean.valueOf(value.toString());
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Object> getList(String key)
+    {
+        Object value = getProperty(key);
+
+        return value == null ? Collections.EMPTY_LIST : Collections.unmodifiableList((List<Object>) value);
     }
 }

@@ -1,5 +1,7 @@
 package dev.yaml.jezyaml;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -115,5 +117,15 @@ public class EasyYamlTest
 
         String value = easyYaml.getString("customer.given");
         Assert.assertEquals("Unexpected string value.", "Dorothy", value);
+    }
+
+    @Test
+    public void shouldReturnListProperty() throws YAMLParsingException
+    {
+        EasyYaml easyYaml = EasyYaml.fromFile("simple.yml");
+
+        List<Object> values = easyYaml.getList("items");
+        Assert.assertNotNull("Unexpected list value.", values);
+        Assert.assertFalse("Unexpected list returned.", values.isEmpty());
     }
 }
