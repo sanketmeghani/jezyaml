@@ -5,12 +5,12 @@ import org.junit.Test;
 
 public class EasyYamlTest
 {
-    private String yaml = "a: 'string'\nb: 2\nc:\n  - aaa\n  - bbb\nd: false\nlevel1:\n  level2:\n    level3: 'Level 3 Value'";
+    private String yamlString = "a: 'string'\nb: 2\nc:\n  - aaa\n  - bbb\nd: false\nlevel1:\n  level2:\n    level3: 'Level 3 Value'";
 
     @Test
     public void shouldCreateUsingString()
     {
-        EasyYaml easyYaml = new EasyYaml(yaml);
+        EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
         Assert.assertNotNull("Could not instantiate EasyYaml with String.", easyYaml);
     }
@@ -18,7 +18,7 @@ public class EasyYamlTest
     @Test
     public void shouldReturnStringProperty()
     {
-        EasyYaml easyYaml = new EasyYaml(yaml);
+        EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
         String value = easyYaml.getString("a");
         Assert.assertEquals("Unexpected string value.", "string", value);
@@ -27,7 +27,7 @@ public class EasyYamlTest
     @Test
     public void shouldReturnNullForUnknownStringKey()
     {
-        EasyYaml easyYaml = new EasyYaml(yaml);
+        EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
         String value = easyYaml.getString("unknown");
         Assert.assertNull("Unexpected string value.", value);
@@ -36,7 +36,7 @@ public class EasyYamlTest
     @Test
     public void shouldReturnPassedString()
     {
-        EasyYaml easyYaml = new EasyYaml(yaml);
+        EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
         String value = easyYaml.getString("unknown", "known");
         Assert.assertEquals("Unexpected string value.", "known", value);
@@ -45,7 +45,7 @@ public class EasyYamlTest
     @Test
     public void shouldReturnIntegerProperty()
     {
-        EasyYaml easyYaml = new EasyYaml(yaml);
+        EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
         Integer value = easyYaml.getInteger("b");
         Assert.assertEquals("Unexpected integer value.", Integer.valueOf(2), value);
@@ -54,7 +54,7 @@ public class EasyYamlTest
     @Test
     public void shouldReturnNullForUnknownIntegerKey()
     {
-        EasyYaml easyYaml = new EasyYaml(yaml);
+        EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
         Integer value = easyYaml.getInteger("unknown");
         Assert.assertNull("Unexpected integer value.", value);
@@ -63,7 +63,7 @@ public class EasyYamlTest
     @Test
     public void shouldReturnPassedInteger()
     {
-        EasyYaml easyYaml = new EasyYaml(yaml);
+        EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
         Integer value = easyYaml.getInteger("unknown", 5);
         Assert.assertEquals("Unexpected integer value.", Integer.valueOf(5), value);
@@ -72,7 +72,7 @@ public class EasyYamlTest
     @Test
     public void shouldReturnBooleanProperty()
     {
-        EasyYaml easyYaml = new EasyYaml(yaml);
+        EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
         Boolean value = easyYaml.getBoolean("d");
         Assert.assertEquals("", Boolean.FALSE, value);
@@ -81,7 +81,7 @@ public class EasyYamlTest
     @Test
     public void shouldReturnNullForUnknownBooleanKey()
     {
-        EasyYaml easyYaml = new EasyYaml(yaml);
+        EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
         Boolean value = easyYaml.getBoolean("unknown");
         Assert.assertNull("Unexpected integer value.", value);
@@ -90,7 +90,7 @@ public class EasyYamlTest
     @Test
     public void shouldReturnPassedBoolean()
     {
-        EasyYaml easyYaml = new EasyYaml(yaml);
+        EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
         Boolean value = easyYaml.getBoolean("unknown", Boolean.TRUE);
         Assert.assertEquals("Unexpected integer value.", Boolean.TRUE, value);
@@ -99,7 +99,7 @@ public class EasyYamlTest
     @Test
     public void shouldReturnNestedStringProperty()
     {
-        EasyYaml easyYaml = new EasyYaml(yaml);
+        EasyYaml easyYaml = EasyYaml.fromString(yamlString);
         
         String value = easyYaml.getString("level1.level2.level3");
         Assert.assertEquals("", "Level 3 Value", value);

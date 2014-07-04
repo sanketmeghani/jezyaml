@@ -9,13 +9,21 @@ public class EasyYaml
 {
     private Map<String, Object> yamlData = new LinkedHashMap<String, Object>();
 
-    @SuppressWarnings("unchecked")
-    public EasyYaml(String yamlString)
+    private EasyYaml()
     {
-        Yaml yaml = new Yaml();
-        yamlData = (Map<String, Object>) yaml.load(yamlString);
     }
 
+    @SuppressWarnings("unchecked")
+    public static EasyYaml fromString(String yamlString)
+    {
+        EasyYaml easyYaml = new EasyYaml();
+        
+        Yaml yaml = new Yaml();
+        easyYaml.yamlData = (Map<String, Object>) yaml.load(yamlString);
+        
+        return easyYaml;
+    }
+    
     private Object getProperty(String propertyName)
     {
         Object propertyValue = null;
