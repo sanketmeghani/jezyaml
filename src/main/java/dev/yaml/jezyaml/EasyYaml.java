@@ -1,5 +1,6 @@
 package dev.yaml.jezyaml;
 
+import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -17,13 +18,26 @@ public class EasyYaml
     public static EasyYaml fromString(String yamlString)
     {
         EasyYaml easyYaml = new EasyYaml();
-        
+
         Yaml yaml = new Yaml();
         easyYaml.yamlData = (Map<String, Object>) yaml.load(yamlString);
-        
+
         return easyYaml;
     }
-    
+
+    @SuppressWarnings("unchecked")
+    public static EasyYaml fromFile(String fileName)
+    {
+        EasyYaml easyYaml = new EasyYaml();
+
+        InputStream yamlStream = EasyYaml.class.getClassLoader().getResourceAsStream(fileName);
+
+        Yaml yaml = new Yaml();
+        easyYaml.yamlData = (Map<String, Object>) yaml.load(yamlStream);
+
+        return easyYaml;
+    }
+
     private Object getProperty(String propertyName)
     {
         Object propertyValue = null;
