@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
 
+import dev.yaml.jezyaml.exception.YAMLParsingException;
+
 public class EasyYaml
 {
     private Map<String, Object> yamlData = new LinkedHashMap<String, Object>();
@@ -15,25 +17,39 @@ public class EasyYaml
     }
 
     @SuppressWarnings("unchecked")
-    public static EasyYaml fromString(String yamlString)
+    public static EasyYaml fromString(String yamlString) throws YAMLParsingException
     {
         EasyYaml easyYaml = new EasyYaml();
 
-        Yaml yaml = new Yaml();
-        easyYaml.yamlData = (Map<String, Object>) yaml.load(yamlString);
+        try
+        {
+            Yaml yaml = new Yaml();
+            easyYaml.yamlData = (Map<String, Object>) yaml.load(yamlString);
+        }
+        catch (Exception e)
+        {
+            throw new YAMLParsingException("Unable to parse YAML", e);
+        }
 
         return easyYaml;
     }
 
     @SuppressWarnings("unchecked")
-    public static EasyYaml fromFile(String fileName)
+    public static EasyYaml fromFile(String fileName) throws YAMLParsingException
     {
         EasyYaml easyYaml = new EasyYaml();
 
-        InputStream yamlStream = EasyYaml.class.getClassLoader().getResourceAsStream(fileName);
+        try
+        {
+            InputStream yamlStream = EasyYaml.class.getClassLoader().getResourceAsStream(fileName);
 
-        Yaml yaml = new Yaml();
-        easyYaml.yamlData = (Map<String, Object>) yaml.load(yamlStream);
+            Yaml yaml = new Yaml();
+            easyYaml.yamlData = (Map<String, Object>) yaml.load(yamlStream);
+        }
+        catch (Exception e)
+        {
+            throw new YAMLParsingException("Unable to parse YAML", e);
+        }
 
         return easyYaml;
     }

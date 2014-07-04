@@ -3,12 +3,14 @@ package dev.yaml.jezyaml;
 import org.junit.Assert;
 import org.junit.Test;
 
+import dev.yaml.jezyaml.exception.YAMLParsingException;
+
 public class EasyYamlTest
 {
     private String yamlString = "a: 'string'\nb: 2\nc:\n  - aaa\n  - bbb\nd: false\nlevel1:\n  level2:\n    level3: 'Level 3 Value'";
 
     @Test
-    public void shouldCreateUsingString()
+    public void shouldCreateUsingString() throws YAMLParsingException
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
@@ -16,7 +18,7 @@ public class EasyYamlTest
     }
 
     @Test
-    public void shouldReturnStringProperty()
+    public void shouldReturnStringProperty() throws YAMLParsingException
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
@@ -25,7 +27,7 @@ public class EasyYamlTest
     }
 
     @Test
-    public void shouldReturnNullForUnknownStringKey()
+    public void shouldReturnNullForUnknownStringKey() throws YAMLParsingException
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
@@ -34,7 +36,7 @@ public class EasyYamlTest
     }
 
     @Test
-    public void shouldReturnPassedString()
+    public void shouldReturnPassedString() throws YAMLParsingException
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
@@ -43,7 +45,7 @@ public class EasyYamlTest
     }
 
     @Test
-    public void shouldReturnIntegerProperty()
+    public void shouldReturnIntegerProperty() throws YAMLParsingException
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
@@ -52,7 +54,7 @@ public class EasyYamlTest
     }
 
     @Test
-    public void shouldReturnNullForUnknownIntegerKey()
+    public void shouldReturnNullForUnknownIntegerKey() throws YAMLParsingException
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
@@ -61,7 +63,7 @@ public class EasyYamlTest
     }
 
     @Test
-    public void shouldReturnPassedInteger()
+    public void shouldReturnPassedInteger() throws YAMLParsingException
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
@@ -70,7 +72,7 @@ public class EasyYamlTest
     }
 
     @Test
-    public void shouldReturnBooleanProperty()
+    public void shouldReturnBooleanProperty() throws YAMLParsingException
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
@@ -79,7 +81,7 @@ public class EasyYamlTest
     }
 
     @Test
-    public void shouldReturnNullForUnknownBooleanKey()
+    public void shouldReturnNullForUnknownBooleanKey() throws YAMLParsingException
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
@@ -88,7 +90,7 @@ public class EasyYamlTest
     }
 
     @Test
-    public void shouldReturnPassedBoolean()
+    public void shouldReturnPassedBoolean() throws YAMLParsingException
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
@@ -97,7 +99,7 @@ public class EasyYamlTest
     }
 
     @Test
-    public void shouldReturnNestedStringProperty()
+    public void shouldReturnNestedStringProperty() throws YAMLParsingException
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
 
@@ -106,11 +108,9 @@ public class EasyYamlTest
     }
 
     @Test
-    public void shouldLoadFromFile()
+    public void shouldLoadFromFile() throws YAMLParsingException
     {
-        String fileName = "simple.yml";
-
-        EasyYaml easyYaml = EasyYaml.fromFile(fileName);
+        EasyYaml easyYaml = EasyYaml.fromFile("simple.yml");
         Assert.assertNotNull("Could not instantiate EasyYaml from file.", easyYaml);
 
         String value = easyYaml.getString("customer.given");
