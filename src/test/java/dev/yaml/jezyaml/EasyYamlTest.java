@@ -95,13 +95,25 @@ public class EasyYamlTest
         Boolean value = easyYaml.getBoolean("unknown", Boolean.TRUE);
         Assert.assertEquals("Unexpected integer value.", Boolean.TRUE, value);
     }
-    
+
     @Test
     public void shouldReturnNestedStringProperty()
     {
         EasyYaml easyYaml = EasyYaml.fromString(yamlString);
-        
+
         String value = easyYaml.getString("level1.level2.level3");
         Assert.assertEquals("", "Level 3 Value", value);
+    }
+
+    @Test
+    public void shouldLoadFromFile()
+    {
+        String fileName = "simple.yml";
+
+        EasyYaml easyYaml = EasyYaml.fromFile(fileName);
+        Assert.assertNotNull("Could not instantiate EasyYaml from file.", easyYaml);
+
+        String value = easyYaml.getString("customer.given");
+        Assert.assertEquals("Unexpected string value.", "Dorothy", value);
     }
 }
