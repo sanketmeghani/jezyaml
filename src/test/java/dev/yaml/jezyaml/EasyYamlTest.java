@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class EasyYamlTest
 {
-    private String yaml = "a: 'string'\nb: 2\nc:\n  - aaa\n  - bbb";
+    private String yaml = "a: 'string'\nb: 2\nc:\n  - aaa\n  - bbb\nd: false";
 
     @Test
     public void shouldCreateUsingString()
@@ -67,5 +67,32 @@ public class EasyYamlTest
 
         Integer value = easyYaml.getInteger("unknown", 5);
         Assert.assertEquals("Unexpected integer value.", Integer.valueOf(5), value);
+    }
+
+    @Test
+    public void shouldReturnBooleanProperty()
+    {
+        EasyYaml easyYaml = new EasyYaml(yaml);
+
+        Boolean value = easyYaml.getBoolean("d");
+        Assert.assertEquals("", Boolean.FALSE, value);
+    }
+
+    @Test
+    public void shouldReturnNullForUnknownBooleanKey()
+    {
+        EasyYaml easyYaml = new EasyYaml(yaml);
+
+        Boolean value = easyYaml.getBoolean("unknown");
+        Assert.assertNull("Unexpected integer value.", value);
+    }
+
+    @Test
+    public void shouldReturnPassedBoolean()
+    {
+        EasyYaml easyYaml = new EasyYaml(yaml);
+
+        Boolean value = easyYaml.getBoolean("unknown", Boolean.TRUE);
+        Assert.assertEquals("Unexpected integer value.", Boolean.TRUE, value);
     }
 }

@@ -73,4 +73,16 @@ public class EasyYaml
 
         return value == null ? defaultValue : Integer.valueOf(value.toString());
     }
+
+    public Boolean getBoolean(String key)
+    {
+        return getBoolean(key, null);
+    }
+
+    public Boolean getBoolean(String key, Boolean defaultValue)
+    {
+        Object value = getProperty(key);
+
+        return value == null ? defaultValue : Boolean.valueOf(value.toString());
+    }
 }
